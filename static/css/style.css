@@ -1,0 +1,163 @@
+/* General Background */
+body {
+    background-color: #1c1e21 !important; /* Force the dark background */
+    color: #e0e0e0 !important; /* Ensure text is light-colored */
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+
+/* Container */
+.container {
+    background-color: #192734; /* Slightly lighter dark background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin-top: 50px;
+    color: #e1e8ed; /* Light text within container */
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: #ffffff; /* Pure white for headers */
+}
+
+/* Form Elements */
+.form-control {
+    background-color: #243447; /* Darker input background */
+    color: #e1e8ed; /* Light text */
+    border: 1px solid #38444d; /* Subtle border for inputs */
+}
+
+label {
+    color: #8899a6; /* Muted light gray for labels */
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #1da1f2; /* Twitter blue for primary button */
+    border: none;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1a91da; /* Darker blue on hover */
+}
+
+/* Information Sections */
+.list-group-item {
+    background-color: #22303c !important; /* Darker background for list items */
+    border: 1px solid #38444d; /* Light border */
+    color: #e1e8ed !important; /* Light gray text for readability */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.list-group-item strong {
+    color: #ffffff !important; /* White for emphasis on bold text */
+}
+
+
+
+/* Calendar */
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.month {
+    background-color: #192734; /* Slightly lighter than main container */
+    border: 1px solid #38444d; /* Border for separation */
+    border-radius: 5px;
+    padding: 10px;
+    color: #e1e8ed; /* Light text for readability */
+    width: 32%;
+    margin-bottom: 20px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    padding: 7px;
+    border: 1px solid #38444d; /* Subtle border */
+    border-radius: 5px;
+    text-align: center;
+    height: 50px;
+    color: #e1e8ed; /* Light gray text */
+    box-sizing: border-box;
+}
+
+.day.header {
+    background-color: #253341; /* Darker header background */
+    color: #ffffff; /* White text for headers */
+    font-weight: bold;
+}
+
+.day.empty {
+    background-color: transparent;
+}
+
+/* Special Day Colors */
+.holiday {
+    background-color: #f4b400; /* Bright yellow for holidays */
+    color: #000000; /* Dark text for readability */
+}
+
+.leave {
+    background-color: #17bf63; /* Twitter green for leave days */
+    color: #ffffff; /* White text */
+}
+
+.official-holiday {
+    background-color: #e0245e; /* Red for official holidays */
+    color: #ffffff; /* White text */
+}
+
+.weekend {
+    background-color: #38444d; /* Dark gray for weekends */
+    color: #ffffff; /* White text */
+}
+
+/* Tooltip */
+.tooltip {
+    background-color: #253341; /* Dark tooltip background */
+    color: #e1e8ed; /* Light text for readability */
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+    z-index: 10;
+}
+
+/* Links */
+a {
+    color: #1da1f2; /* Twitter blue for links */
+}
+
+a:hover {
+    color: #1a91da;
+}
+
+/* List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: #e1e8ed; /* Light gray text in lists */
+}
+
+li {
+    background: #22303c; /* Dark background for list items */
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #e1e8ed; /* Light gray text */
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Planer Urlopów 2025</title>
+		<!-- Link to the external CSS file in the static folder -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<!-- Bootstrap CSS (optional if already in your style.css) -->
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Planer Urlopów 2025</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="max_leaves">Podaj maksymalną liczbę dni urlopu (domyślnie 26):</label>
+                <input type="number" id="max_leaves" name="max_leaves" min="1" max="100" class="form-control" value="26">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Oblicz</button>
+        </form>
+
+        <div class="mt-4">
+            <h2>O Planerze</h2>
+            <p>To narzędzie pomaga w efektywnym planowaniu urlopów na rok 2025, uwzględniając weekendy oraz polskie święta państwowe.</p>
+        </div>
+
+        <div class="mt-4">
+            <h2>Jak korzystać</h2>
+            <ol>
+                <li>Podaj maksymalną liczbę dni urlopu.</li>
+                <li>Kliknij przycisk "Oblicz".</li>
+                <li>Sprawdź proponowane dni urlopu i długie weekendy.</li>
+            </ol>
+        </div>
+
+        {% if proposed_leaves or total_holidays %}
+    <h2 class="mt-4 text-center">Kalendarz 2025</h2>
+    <div class="calendar">
+        {% set month_names = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"] %}
+        {% for month in range(1, 13) %}
+        <div class="month">
+            <h3 class="text-center">{{ month }}. Miesiąc - {{ month_names[month - 1] }}</h3>
+            <div class="days">
+                <div class="day header">Pn</div>
+                <div class="day header">Wt</div>
+                <div class="day header">Śr</div>
+                <div class="day header">Cz</div>
+                <div class="day header">Pt</div>
+                <div class="day header">So</div>
+                <div class="day header">Nd</div>
+                
+                {% set days_in_month = (month == 2 and 28 or [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1]) %}
+                {% set first_day = datetime(2025, month, 1).weekday() %}
+                
+                <!-- Add empty divs for days before the first day of the month -->
+                {% for _ in range(first_day) %}
+                    <div class="day empty"></div>
+                {% endfor %}
+                
+                {% for day in range(1, days_in_month + 1) %}
+                    {% set date = datetime(2025, month, day) %}
+                    <div class="day 
+                        {% if date in proposed_leaves %}leave{% elif date in official_holidays %}official-holiday{% elif date in all_holidays %}holiday{% endif %} 
+                        {% if date.weekday() in [5, 6] %}weekend{% endif %}">
+                        {{ day }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+        {% if consecutive_periods %}
+        <h2 class="mt-4 text-center">Długie weekendy:</h2>
+        <ul class="list-group">
+            {% for period in consecutive_periods %}
+            <li class="list-group-item">
+                <strong>{{ period[0].day }} {{ month_names[period[0].month - 1] }} - {{ period[-1].day }} {{ month_names[period[-1].month - 1] }}:</strong>
+                {{ (period[-1] - period[0]).days + 1 }} dni
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if total_consecutive_days %}
+        <h3 class="mt-4">Łączna liczba dni wolnych w długich okresach: {{ total_consecutive_days }}</h3>
+        {% endif %}
+
+        {% if total_holidays %}
+        <h3 class="mt-4">Razem dni wolnych w roku 2025 (weekendy + święta + urlopy): {{ total_holidays }}</h3>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                trigger: 'hover',
+                placement: 'top'
+            });
+        });
+    </script>
+</body>
+</html>
