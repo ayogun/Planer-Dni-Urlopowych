@@ -161,3 +161,10 @@ li {
     border-radius: 5px;
     color: #e1e8ed; /* Light gray text */
 }
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; /* Ensures it takes the full height of the parent row */
+}
